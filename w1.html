@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WebNex oferece soluções digitais inovadoras, incluindo softwares personalizados, desenvolvimento web e aplicativos mobile.">
+    <meta name="keywords" content="tecnologia, desenvolvimento web, aplicativos mobile, softwares personalizados, WebNex">
+    <meta property="og:title" content="WebNex - Soluções Digitais Inteligentes">
+    <meta property="og:description" content="Conectamos ideias, negócios e pessoas com tecnologia inovadora e confiável.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516321310764-9d96125e03dc">
+    <meta property="og:url" content="https://www.webnex.com.br">
+    <title>WebNex - Soluções Digitais Inteligentes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #F4F5F7;
+            color: #172B4D;
+        }
+
+        /* Animações */
+        .animate-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0052CC;
+        }
+
+        /* Menu Hambúrguer */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1002;
+            padding: 10px;
+            pointer-events: auto;
+        }
+
+        .menu-toggle .hamburger {
+            width: 30px;
+            height: 3px;
+            background-color: #172B4D;
+            position: relative;
+        }
+
+        .menu-toggle .hamburger::before,
+        .menu-toggle .hamburger::after {
+            content: '';
+            width: 30px;
+            height: 3px;
+            background-color: #172B4D;
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-toggle .hamburger::before {
+            top: -8px;
+        }
+
+        .menu-toggle .hamburger::after {
+            top: 8px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #FFFFFF;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: right 0.3s ease;
+            z-index: 1001;
+        }
+
+        nav.active {
+            right: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 70px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #172B4D;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            color: #0052CC;
+        }
+
+        .cta-button {
+            background-color: #0052CC;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background-color: #003087;
+        }
+
+        /* Seção Hero */
+        .hero {
+            background: linear-gradient(rgba(0, 82, 204, 0.8), rgba(0, 82, 204, 0.8)), url('https://images.unsplash.com/photo-1516321310764-9d96125e03dc');
+            background-size: cover;
+            background-position: center;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #FFFFFF;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        /* Seção de Serviços */
+        .services {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .services p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #0052CC;
+        }
+
+        /* Seção Sobre */
+        .about {
+            background-color: #FFFFFF;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Seção de Avaliações */
+        .reviews {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #F4F5F7;
+        }
+
+        .reviews h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .reviews p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .review-card {
+            text-align: center;
+        }
+
+        .review-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #172B4D;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #172B4D;
+            margin-bottom: 10px;
+        }
+
+        .rating {
+            color: #FFD700;
+            font-size: 16px;
+        }
+
+        .review-form {
+            margin-top: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .review-form h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0052CC;
+        }
+
+        .review-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .review-form input,
+        .review-form textarea {
+            padding: 15px;
+            border: 1px solid #DDE2E8;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .review-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .star-rating {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 5px;
+            padding: 10px 0;
+        }
+
+        .star-rating svg {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            fill: #DDE2E8;
+            transition: fill 0.2s;
+            display: inline-block;
+        }
+
+        .star-rating svg.filled {
+            fill: #FFD700;
+        }
+
+        /* Seção Contato */
+        .contact {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact input,
+        .contact textarea {
+            padding: 15px;
+            border: 1px solid #DDE2E8;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .contact textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Botão Voltar ao Topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0052CC;
+            color: #FFFFFF;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        /* Botão WhatsApp */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background-color: #25D366;
+            color: #FFFFFF;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #20B354;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #172B4D;
+            color: #FFFFFF;
+            padding: 40px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #36B37E;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .services,
+            .about,
+            .reviews,
+            .contact {
+                padding: 40px 20px;
+            }
+
+            .reviews h2 {
+                font-size: 28px;
+            }
+
+            .review-form h3 {
+                font-size: 20px;
+            }
+
+            .star-rating svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none;
+            }
+
+            nav {
+                position: static;
+                width: auto;
+                height: auto;
+                box-shadow: none;
+                background: none;
+                display: flex;
+                align-items: center;
+            }
+
+            nav ul {
+                flex-direction: row;
+                padding: 0;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <svg class="logo-icon" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                <rect width="40" height="40" fill="#0052CC" rx="8"/>
+                <text x="50%" y="50%" font-size="28" font-weight="bold" fill="#FFFFFF" text-anchor="middle" alignment-baseline="middle">W</text>
+            </svg>
+            <span class="logo-text">WebNex</span>
+        </div>
+        <div class="menu-toggle" aria-label="Abrir menu de navegação">
+            <div class="hamburger"></div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#reviews">Avaliações</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <li><a href="#contact" class="cta-button">Fale Conosco</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Seção Hero -->
+    <section class="hero animate-section" id="home">
+        <h1>Soluções Digitais para o Futuro</h1>
+        <p>Conectamos ideias, negócios e pessoas com tecnologia inovadora e confiável.</p>
+        <a href="#contact" class="cta-button">Comece Agora</a>
+    </section>
+
+    <!-- Seção de Serviços -->
+    <section class="services animate-section" id="services">
+        <h2>Nossos Serviços</h2>
+        <p>Desenvolvemos soluções personalizadas para acelerar sua presença digital.</p>
+        <div class="grid">
+            <div class="card">
+                <h3>Softwares Personalizados</h3>
+                <p>Criamos sistemas sob medida para atender às necessidades específicas do seu negócio.</p>
+            </div>
+            <div class="card">
+                <h3>Desenvolvimento Web</h3>
+                <p>Sites institucionais, blogs e lojas virtuais com design moderno e funcional.</p>
+            </div>
+            <div class="card">
+                <h3>Aplicativos Mobile</h3>
+                <p>Aplicativos intuitivos para iOS e Android, focados na experiência do usuário.</p>
+            </div>
+            <div class="card">
+                <h3>Suporte e Consultoria</h3>
+                <p>Assistência técnica e estratégias para otimizar sua infraestrutura digital.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section class="about animate-section" id="about">
+        <h2>Quem Somos</h2>
+        <p>A WebNex é uma empresa de tecnologia focada em criar soluções digitais inovadoras. Combinamos simplicidade, força visual e compromisso com a qualidade para conectar empresas e empreendedores ao futuro. Nossa missão é transformar ideias em realidade com softwares, sites e aplicativos que impulsionam resultados.</p>
+    </section>
+
+    <!-- Seção de Avaliações -->
+    <section class="reviews animate-section" id="reviews">
+        <h2>O que Nossos Clientes Dizem</h2>
+        <p>Veja as avaliações de quem já confiou na WebNex e compartilhe sua experiência!</p>
+        <div class="grid">
+            <div class="card review-card">
+                <h3>João Silva</h3>
+                <p class="review-text">"A WebNex transformou nosso negócio com um site incrível e suporte excepcional!"</p>
+                <div class="rating">★★★★★</div>
+            </div>
+            <div class="card review-card">
+                <h3>Maria Oliveira</h3>
+                <p class="review-text">"O aplicativo desenvolvido pela equipe foi exatamente o que precisávamos. Recomendo!"</p>
+                <div class="rating">★★★★☆</div>
+            </div>
+            <div class="card review-card">
+                <h3>Carlos Souza</h3>
+                <p class="review-text">"Serviço rápido e de alta qualidade. A consultoria fez toda a diferença."</p>
+                <div class="rating">★★★★★</div>
+            </div>
+        </div>
+        <div class="review-form">
+            <h3>Deixe Sua Avaliação</h3>
+            <form action="https://formsubmit.co/joaolucasgoulart16@gmail.com" method="POST" id="review-form">
+                <input type="text" name="nome" placeholder="Seu Nome" required>
+                <textarea name="avaliacao" placeholder="Sua Avaliação" required></textarea>
+                <div class="star-rating" aria-label="Selecione a pontuação">
+                    <svg data-value="1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg data-value="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg data-value="3"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg data-value="4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg data-value="5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <input type="hidden" name="estrelas" id="star-input" required>
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="Nova Avaliação - WebNex">
+                <button type="submit" class="cta-button">Enviar Avaliação</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section class="contact animate-section" id="contact">
+        <h2>Entre em Contato</h2>
+        <p>Conte-nos sobre seu projeto e descubra como podemos ajudar.</p>
+        <form action="https://formsubmit.co/joaolucasgoulart16@gmail.com" method="POST" id="contact-form">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <textarea name="mensagem" placeholder="Mensagem" required></textarea>
+            <input type="hidden" name="_captcha" value="false">
+            <button type="submit" class="cta-button">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Botão WhatsApp -->
+    <a href="https://wa.me/5531971108817?text=Olá,%20quero%20saber%20mais%20sobre%20os%20serviços%20da%20WebNex" class="whatsapp-button" aria-label="Contatar via WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+            <path d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6 1 3.4 1.5 5.3 1.5 6.3 0 11.4-5.1 11.4-11.4 0-3-1.2-5.9-3.3-8zM12 21.4c-1.7 0-3.3-.5-4.7-1.4l-.3-.2-3.5 1 1-3.4-.2-.3c-1-1.5-1.5-3.2-1.5-5 0-5.2 4.2-9.4 9.4-9.4 2.5 0 4.9 1 6.7 2.8 1.8 1.8 2.8 4.2 2.8 6.7 0 5.2-4.3 9.4-9.4 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.2-.7.8-.9.9-.2.1-.3.1-.6-.1-.3-.2-1.2-.7-2.3-1.4-.9-.6-1.5-1.3-1.7-1.6-.2-.3 0-.5.1-.6.1-.1.2-.2.3-.3.1-.1.2-.3.2-.4.1-.2 0-.4-.1-.6-.1-.2-.9-2.1-1.2-2.9-.3-.7-.6-.6-1-.6H7s-.2 0-.4.1c-.2.1-.7.3-1 .8s-.4 1.1-.4 2.1 1.5 3.1 1.7 3.3c.2.2 2.9 4.4 7.1 6.2 1 .4 1.8.6 2.4.8.6.2 1.2.1 1.7-.1.5-.2 1.5-.6 1.7-1.2.3-.6.3-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/>
+        </svg>
+    </a>
+
+    <!-- Botão Voltar ao Topo -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">↑</a>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2025 WebNex. Todos os direitos reservados.</p>
+        <p>
+            <a href="#">Suporte</a> |
+            <a href="#">Privacidade</a> |
+            <a href="#">Termos</a>
+        </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu Hambúrguer
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                });
+
+                const navLinks = document.querySelectorAll('nav ul li a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        nav.classList.remove('active');
+                    });
+                });
+            }
+        });
+
+        // Animações ao Rolar
+        const sections = document.querySelectorAll('.animate-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Sistema de Estrelas
+        const stars = document.querySelectorAll('.star-rating svg');
+        const starInput = document.getElementById('star-input');
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+                starInput.value = value;
+                stars.forEach(s => {
+                    s.classList.toggle('filled', s.getAttribute('data-value') <= value);
+                });
+            });
+        });
+
+        // Botão Voltar ao Topo
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 300);
+        });
+
+        // Confirmação de Envio de Formulários
+        const forms = document.querySelectorAll('#contact-form, #review-form');
+        forms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form)
+                }).then(() => {
+                    alert('Formulário enviado com sucesso!');
+                    form.reset();
+                    stars.forEach(star => star.classList.remove('filled'));
+                    starInput.value = '';
+                }).catch(() => {
+                    alert('Erro ao enviar o formulário. Tente novamente.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
